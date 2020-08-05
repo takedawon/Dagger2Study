@@ -16,5 +16,13 @@ class GithubApiProvider {
             .build()
             .create(AuthApi::class.java)
 
-    fun provideGithubApi(context: Context)
+    fun provideGithubApi(context: Context):GithubApi =
+        Retrofit.Builder()
+            .baseUrl("https://api.github.com/")
+            .client(proviedOkHttpClient(provideLogginIntercepter(),
+            provideAuthIntercepter(provideAuthTokenProvieder(context))))
+            .addCallAdapterFactory(RxJava3CallAdapterFactory.createAsync())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(GithubApi::class.java)
 }

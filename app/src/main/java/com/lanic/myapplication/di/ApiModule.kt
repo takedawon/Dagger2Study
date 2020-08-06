@@ -1,10 +1,11 @@
-package com.lanic.myapplication
+package com.lanic.myapplication.di
 
+import com.lanic.myapplication.api.AuthApi
+import com.lanic.myapplication.api.GithubApi
 import dagger.Module
 import dagger.Provides
 import hu.akarnokd.rxjava3.retrofit.RxJava3CallAdapterFactory
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.CallAdapter
 import retrofit2.Converter
 import retrofit2.Retrofit
@@ -52,5 +53,5 @@ class ApiModule {
 
     @Provides
     @Singleton
-    fun provideConverterFactory() : Converter.Factory = GsonConverterFactory.create()
+    fun provideConverterFactory(): Converter.Factory = GsonConverterFactory.create()
 }

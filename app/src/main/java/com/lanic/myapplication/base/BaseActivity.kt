@@ -1,4 +1,4 @@
-package com.lanic.myapplication
+package com.lanic.myapplication.base
 
 import android.os.Bundle
 import androidx.annotation.LayoutRes

@@ -1,5 +1,7 @@
-package com.lanic.myapplication
+package com.lanic.myapplication.di
 
+import com.lanic.myapplication.AuthInterceptor
+import com.lanic.myapplication.AuthTokenProvider
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -24,7 +26,8 @@ class NetworkModule {
     @Singleton
     private fun provideAuthorizedOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
-        authInterceptor: AuthInterceptor) : OkHttpClient
+        authInterceptor: AuthInterceptor
+    ) : OkHttpClient
     = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
         .addInterceptor(authInterceptor)
@@ -39,6 +42,6 @@ class NetworkModule {
 
     fun provideAuthInterceptor(provider: AuthTokenProvider): AuthInterceptor {
         val token = provider.token ?: throw IllegalStateException("authToken cannot be null")
-        return AuthIntercpetor(token)
+        return AuthInterceptor(token)
     }
 }

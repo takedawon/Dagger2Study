@@ -15,7 +15,7 @@ class NetworkModule {
     @Provides
     @Named("unauthorized")
     @Singleton
-    private fun provideUnauthorizedOkHttpClient(
+    fun provideUnauthorizedOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(loggingInterceptor)
@@ -24,7 +24,7 @@ class NetworkModule {
     @Provides
     @Named("authorized")
     @Singleton
-    private fun provideAuthorizedOkHttpClient(
+    fun provideAuthorizedOkHttpClient(
         loggingInterceptor: HttpLoggingInterceptor,
         authInterceptor: AuthInterceptor
     ) : OkHttpClient
@@ -40,6 +40,8 @@ class NetworkModule {
         level = HttpLoggingInterceptor.Level.BODY
     }
 
+    @Provides
+    @Singleton
     fun provideAuthInterceptor(provider: AuthTokenProvider): AuthInterceptor {
         val token = provider.token ?: throw IllegalStateException("authToken cannot be null")
         return AuthInterceptor(token)

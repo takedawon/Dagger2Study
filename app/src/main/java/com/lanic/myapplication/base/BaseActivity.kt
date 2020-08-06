@@ -5,10 +5,11 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import dagger.android.support.DaggerAppCompatActivity
 import timber.log.Timber
 
 abstract class BaseActivity<B : ViewDataBinding>
-    (@LayoutRes val layoutId: Int) : AppCompatActivity() {
+    (@LayoutRes val layoutId: Int) : DaggerAppCompatActivity() {
 
     lateinit var binding : B
 
